@@ -38,6 +38,11 @@ if not started -
 sudo systemctl start mysql
 sudo systemctl enable mysql
 
+--login to mysql
+sudo mysql -u root -p
+Enter the password you set during the secure installation.
+
+
 --Create user in MySQL 
 CREATE USER 'Vikas'@'localhost' IDENTIFIED BY 'Test@123'
 
@@ -46,4 +51,20 @@ ALTER USER 'Vikas'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Test@12
 FLUSH PRIVILEGES;
 EXIT;
 
+GRANT ALL PRIVILEGES ON bankappdb.* TO 'Vikas'@'localhost';
 
+--to check all users
+SELECT DISTINCT user FROM mysql.user;
+
+--to check who logged in current user
+SELECT USER(), CURRENT_USER();
+
+Now you have a working MySQL database setup on Ubuntu.
+CREATE USER 'adi'@'localhost' IDENTIFIED BY 'Test@123';
+Creates a new MySQL account adi that can log in only from the same machine.
+By default on MySQL 8, this uses the caching_sha2_password auth plugin.
+
+ALTER USER 'adi'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Test@123';
+Changes the auth plugin for adi@localhost to mysql_native_password (keeps the same password).
+
+This is often used to avoid the JDBC error “Public Key Retrieval is not allowed” without adding allowPublicKeyRetrieval=true to your JDBC URL.
