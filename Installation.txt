@@ -1,0 +1,49 @@
+
+
+1. install java in ubuntu 
+sudo apt install openjdk-17-jre-headless 
+
+2. install maven in ubuntu
+apt install maven -y   # 
+
+3. Install jenkins LTS version- befor installing jenkins, java must be installed.
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+4. Docker installation
+apt install docker.io
+
+docker ps - to check the running conatiner
+
+
+5. sonarqube installation from docker hub
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+6. MySql server installation
+sudo apt install mysql-server -y
+
+7. check mysql server status -
+systemctl status mysql
+
+if not started -
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+--Create user in MySQL 
+CREATE USER 'Vikas'@'localhost' IDENTIFIED BY 'Test@123'
+
+--Alter user 
+ALTER USER 'Vikas'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Test@123';
+FLUSH PRIVILEGES;
+EXIT;
+
+
